@@ -7,22 +7,22 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Moore Makinesini simüle eden Java Swing programı
+ * Moore Makinesini simule eden Java Swing programı
  *
- * Kullanıcıdan aşağıdaki bilgileri alır:
- *  - Durum kümesi (Q: {q0,q1,q2,...})
+ * Kullanıcıdan asagıdaki bilgileri alır:
+ *  - Durum kumesi (Q: {q0,q1,q2,...})
  *  - Girdi alfabesi (S: {a,b})
- *  - Çıktı alfabesi (Γ: {0,1})
- *  - Geçiş tablosu (Her satır TAB ile ayrılmış)
- *  - Çıktı tablosu (Her satır TAB ile ayrılmış)
- *  - Giriş stringi
+ *  - cıktı alfabesi (Γ: {0,1})
+ *  - Gecis tablosu (Her satır TAB ile ayrılmıs)
+ *  - cıktı tablosu (Her satır TAB ile ayrılmıs)
+ *  - Giris stringi
  *
- * Alınan bilgilerle, her geçiş hesaplanır ve durum geçişleri ile üretilen çıktı
- * hem metinsel hem de görsel olarak kullanıcıya sunulur.
+ * Alınan bilgilerle, her gecis hesaplanır ve durum gecisleri ile uretilen cıktı
+ * hem metinsel hem de gorsel olarak kullanıcıya sunulur.
  */
 public class MooreSimulatorGUI extends JFrame {
 
-    // Arayüz bileşenleri
+    // Arayuz bilesenleri
     private final JTextField txtStates;
     private final JTextField txtInputAlphabet;
     private final JTextField txtOutputAlphabet;
@@ -33,21 +33,21 @@ public class MooreSimulatorGUI extends JFrame {
     private final SimulationPanel simulationPanel;
 
     public MooreSimulatorGUI() {
-        setTitle("Moore Makinesi Simülatörü");
+        setTitle("Moore Makinesi Simulatoru");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Üst panel: Kullanıcı giriş alanları
+        // Ust panel: Kullanıcı giris alanları
         JPanel inputPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.WEST;
 
-        // Satır 1: Durum Kümesi
+        // Satır 1: Durum Kumesi
         gbc.gridx = 0;
         gbc.gridy = 0;
-        inputPanel.add(new JLabel("Durumlar (virgülle ayrılmış, ilk durum başlangıç):"), gbc);
+        inputPanel.add(new JLabel("Durumlar (virgulle ayrılmıs, ilk durum baslangıc):"), gbc);
         txtStates = new JTextField("q0,q1,q2,q3");
         gbc.gridx = 1;
         gbc.weightx = 1.0;
@@ -57,38 +57,38 @@ public class MooreSimulatorGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0;
-        inputPanel.add(new JLabel("Girdi Alfabesi (virgülle ayrılmış):"), gbc);
+        inputPanel.add(new JLabel("Girdi Alfabesi (virgulle ayrılmıs):"), gbc);
         txtInputAlphabet = new JTextField("a,b");
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         inputPanel.add(txtInputAlphabet, gbc);
 
-        // Satır 3: Çıktı Alfabesi
+        // Satır 3: cıktı Alfabesi
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.weightx = 0;
-        inputPanel.add(new JLabel("Çıktı Alfabesi (virgülle ayrılmış):"), gbc);
+        inputPanel.add(new JLabel("Cıktı Alfabesi (virgulle ayrılmıs):"), gbc);
         txtOutputAlphabet = new JTextField("0,1");
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         inputPanel.add(txtOutputAlphabet, gbc);
 
-        // Satır 4: Geçiş Tablosu
+        // Satır 4: Gecis Tablosu
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
         areaTransitionTable = new JTextArea(5, 40);
-        areaTransitionTable.setBorder(BorderFactory.createTitledBorder("Geçiş Tablosu (Her satır: <durum> TAB <sembol1 için sonraki durum> TAB <sembol2 için sonraki durum> ... )"));
-        // Örnek veri
+        areaTransitionTable.setBorder(BorderFactory.createTitledBorder("Gecis Tablosu (Her satır: <durum> TAB <sembol1 icin sonraki durum> TAB <sembol2 icin sonraki durum> ... )"));
+        // ornek veri
         areaTransitionTable.setText("q0\tq1\tq0\nq1\tq2\tq0\nq2\tq2\tq3\nq3\tq1\tq0");
         inputPanel.add(new JScrollPane(areaTransitionTable), gbc);
 
-        // Satır 5: Çıktı Tablosu
+        // Satır 5: cıktı Tablosu
         gbc.gridx = 0;
         gbc.gridy = 4;
         areaOutputTable = new JTextArea(3, 40);
-        areaOutputTable.setBorder(BorderFactory.createTitledBorder("Çıktı Tablosu (Her satır: <durum> TAB <çıktı>)"));
-        // Örnek veri
+        areaOutputTable.setBorder(BorderFactory.createTitledBorder("Cikti Tablosu (Her satır: <durum> TAB <cikti>)"));
+        // ornek veri
         areaOutputTable.setText("q0\t1\nq1\t0\nq2\t0\nq3\t1");
         inputPanel.add(new JScrollPane(areaOutputTable), gbc);
 
@@ -101,8 +101,8 @@ public class MooreSimulatorGUI extends JFrame {
         gbc.gridx = 1;
         inputPanel.add(txtInputString, gbc);
 
-        // Satır 7: Simülasyonu Başlatan Buton
-        JButton btnSimulate = new JButton("Simüle Et");
+        // Satır 7: Simulasyonu Baslatan Buton
+        JButton btnSimulate = new JButton("Simule Et");
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
@@ -111,16 +111,16 @@ public class MooreSimulatorGUI extends JFrame {
 
         add(inputPanel, BorderLayout.NORTH);
 
-        // Alt panel: Sonuç metni ve görsel gösterim alanı
+        // Alt panel: Sonuc metni ve gorsel gosterim alanı
         JPanel outputPanel = new JPanel(new BorderLayout());
-        outputPanel.setBorder(new TitledBorder("Simülasyon Sonucu"));
+        outputPanel.setBorder(new TitledBorder("Simulasyon Sonucu"));
 
-        // Metinsel Sonuç Alanı
+        // Metinsel Sonuc Alanı
         areaResult = new JTextArea(5, 40);
         areaResult.setEditable(false);
         outputPanel.add(new JScrollPane(areaResult), BorderLayout.NORTH);
 
-        // Grafiksel Gösterim için Özel Panel
+        // Grafiksel Gosterim icin ozel Panel
         simulationPanel = new SimulationPanel();
         simulationPanel.setPreferredSize(new Dimension(600, 300));
         simulationPanel.setBackground(Color.WHITE);
@@ -128,7 +128,7 @@ public class MooreSimulatorGUI extends JFrame {
 
         add(outputPanel, BorderLayout.CENTER);
 
-        // Buton tıklama olayı: Lambda kullanarak simülasyonu çalıştır
+        // Buton tıklama olayı: Lambda kullanarak simulasyonu calıstır
         btnSimulate.addActionListener(e -> runSimulation());
 
         pack();
@@ -136,25 +136,25 @@ public class MooreSimulatorGUI extends JFrame {
     }
 
     /**
-     * Verilen kullanıcı girdilerine dayanarak simülasyonu çalıştırır.
+     * Verilen kullanıcı girdilerine dayanarak simulasyonu calıstırır.
      */
     private void runSimulation() {
         try {
             // 1. Kullanıcıdan Durum, Alfabe ve Girdi alınması
             String[] states = txtStates.getText().trim().split("\\s*,\\s*");
             if (states.length == 0) {
-                throw new Exception("Durum bilgisi boş!");
+                throw new Exception("Durum bilgisi bos!");
             }
             String[] inputAlphabet = txtInputAlphabet.getText().trim().split("\\s*,\\s*");
             String[] outputAlphabet = txtOutputAlphabet.getText().trim().split("\\s*,\\s*");
 
-            // 2. Geçiş Tablosunun Okunması ve Haritaya Aktarılması (Map<Durum, Map<Girdi, SonrakiDurum>>)
+            // 2. Gecis Tablosunun Okunması ve Haritaya Aktarılması (Map<Durum, Map<Girdi, SonrakiDurum>>)
             Map<String, Map<String, String>> transitionTable = new HashMap<>();
             String[] transitionLines = areaTransitionTable.getText().trim().split("\\n");
             for (String line : transitionLines) {
                 String[] cols = line.split("\\t");
                 if (cols.length < inputAlphabet.length + 1) {
-                    throw new Exception("Geçiş tablosunda yeterli sütun bulunamadı: " + line);
+                    throw new Exception("Gecis tablosunda yeterli sutun bulunamadı: " + line);
                 }
                 String currentState = cols[0].trim();
                 Map<String, String> row = new HashMap<>();
@@ -166,13 +166,13 @@ public class MooreSimulatorGUI extends JFrame {
                 transitionTable.put(currentState, row);
             }
 
-            // 3. Çıktı Tablosunun Okunması (Map<Durum, Çıktı>)
+            // 3. cıktı Tablosunun Okunması (Map<Durum, cıktı>)
             Map<String, String> outputTable = new HashMap<>();
             String[] outputLines = areaOutputTable.getText().trim().split("\\n");
             for (String line : outputLines) {
                 String[] cols = line.split("\\t");
                 if (cols.length < 2) {
-                    throw new Exception("Çıktı tablosu satırı hatalı: " + line);
+                    throw new Exception("cikti tablosu satiri hatali: " + line);
                 }
                 String state = cols[0].trim();
                 String outSymbol = cols[1].trim();
@@ -182,28 +182,28 @@ public class MooreSimulatorGUI extends JFrame {
             // 4. Girdi Stringinin Alınması
             String inputString = txtInputString.getText().trim();
             if (inputString.isEmpty()) {
-                throw new Exception("Girdi stringi boş!");
+                throw new Exception("Girdi stringi bos!");
             }
 
-            // 5. Simülasyonun Gerçekleştirilmesi
+            // 5. Simulasyonun Gerceklestirilmesi
             List<String> simulationPath = new ArrayList<>();
             List<String> producedOutput = new ArrayList<>();
             List<String> inputForTransition = new ArrayList<>();
 
-            // Başlangıç durumunun eklenmesi
+            // Baslangıc durumunun eklenmesi
             String currentState = states[0];
             simulationPath.add(currentState);
             producedOutput.add(outputTable.getOrDefault(currentState, "?"));
 
-            // Girdi karakterlerine göre geçişlerin yapılması
+            // Girdi karakterlerine gore gecislerin yapılması
             for (int i = 0; i < inputString.length(); i++) {
                 String symbol = String.valueOf(inputString.charAt(i));
                 if (!transitionTable.containsKey(currentState)) {
-                    throw new Exception("Geçiş tablosunda '" + currentState + "' durumu bulunamadı!");
+                    throw new Exception("Gecis tablosunda '" + currentState + "' durumu bulunamadı!");
                 }
                 Map<String, String> transitions = transitionTable.get(currentState);
                 if (!transitions.containsKey(symbol)) {
-                    throw new Exception("(" + currentState + ", " + symbol + ") için geçiş tanımlı değil!");
+                    throw new Exception("(" + currentState + ", " + symbol + ") icin gecis tanımlı degil!");
                 }
                 String nextState = transitions.get(symbol);
                 simulationPath.add(nextState);
@@ -212,22 +212,22 @@ public class MooreSimulatorGUI extends JFrame {
                 currentState = nextState;
             }
 
-            // 6. Metinsel Sonuçların Gösterilmesi
+            // 6. Metinsel Sonucların Gosterilmesi
             StringBuilder sb = new StringBuilder();
-            sb.append("Durum Geçişleri: ");
+            sb.append("Durum Gecisleri: ");
             for (int i = 0; i < simulationPath.size(); i++) {
                 sb.append(simulationPath.get(i));
                 if (i < simulationPath.size() - 1) {
                     sb.append(" -> ");
                 }
             }
-            sb.append("\nÜretilen Çıktı: ");
+            sb.append("\nUretilen cıktı: ");
             for (String s : producedOutput) {
                 sb.append(s);
             }
             areaResult.setText(sb.toString());
 
-            // 7. Görsel Simülasyonun Güncellenmesi
+            // 7. Gorsel Simulasyonun Guncellenmesi
             simulationPanel.setSimulationData(simulationPath, inputForTransition, producedOutput);
             simulationPanel.repaint();
 
@@ -237,8 +237,8 @@ public class MooreSimulatorGUI extends JFrame {
     }
 
     /**
-     * SimulationPanel, simülasyon sırasında oluşan durum geçişlerini grafiksel olarak gösterir.
-     * Her durumu daire ile, durum geçişlerini ise oklarla çizerek görselleştirir.
+     * SimulationPanel, simulasyon sırasında olusan durum gecislerini grafiksel olarak gosterir.
+     * Her durumu daire ile, durum gecislerini ise oklarla cizerek gorsellestirir.
      */
     static class SimulationPanel extends JPanel {
         private List<String> simPath = new ArrayList<>();
@@ -246,11 +246,11 @@ public class MooreSimulatorGUI extends JFrame {
         private List<String> outputs = new ArrayList<>();
 
         /**
-         * Simülasyon verilerini günceller.
+         * Simulasyon verilerini gunceller.
          *
-         * @param path   Durum geçiş yolunu içeren liste
-         * @param inputs Geçişlerde kullanılan girdi sembollerini içeren liste
-         * @param outputs Üretilen çıktı sembollerini içeren liste
+         * @param path   Durum gecis yolunu iceren liste
+         * @param inputs Gecislerde kullanılan girdi sembollerini iceren liste
+         * @param outputs uretilen cıktı sembollerini iceren liste
          */
         public void setSimulationData(List<String> path, List<String> inputs, List<String> outputs) {
             this.simPath = path;
@@ -270,10 +270,10 @@ public class MooreSimulatorGUI extends JFrame {
             int panelWidth = getWidth();
             int panelHeight = getHeight();
             int margin = 50;
-            int r = 20; // Daire yarıçapı
+            int r = 20; // Daire yarıcapı
             int gap = (n > 1) ? (panelWidth - 2 * margin) / (n - 1) : 0;
 
-            // Her durum için merkez noktalarının hesaplanması
+            // Her durum icin merkez noktalarının hesaplanması
             List<Point> centers = new ArrayList<>();
             for (int i = 0; i < n; i++) {
                 int x = margin + i * gap;
@@ -281,7 +281,7 @@ public class MooreSimulatorGUI extends JFrame {
                 centers.add(new Point(x, y));
             }
 
-            // Durum dairelerinin çizilmesi
+            // Durum dairelerinin cizilmesi
             for (int i = 0; i < n; i++) {
                 Point p = centers.get(i);
                 g2.setColor(Color.LIGHT_GRAY);
@@ -295,7 +295,7 @@ public class MooreSimulatorGUI extends JFrame {
                 g2.drawString(stateName, p.x - strWidth / 2, p.y + strHeight / 2);
             }
 
-            // Durumlar arası geçiş oklarının çizilmesi ve ok üzerine metin eklenmesi
+            // Durumlar arası gecis oklarının cizilmesi ve ok uzerine metin eklenmesi
             for (int i = 0; i < n - 1; i++) {
                 Point p1 = centers.get(i);
                 Point p2 = centers.get(i + 1);
@@ -306,7 +306,7 @@ public class MooreSimulatorGUI extends JFrame {
                 int y2 = (int) (p2.y - r * Math.sin(angle));
                 g2.drawLine(x1, y1, x2, y2);
 
-                // Ok ucu çizimi
+                // Ok ucu cizimi
                 int arrowSize = 6;
                 Polygon arrowHead = new Polygon();
                 arrowHead.addPoint(0, 0);
@@ -318,7 +318,7 @@ public class MooreSimulatorGUI extends JFrame {
                 g2.rotate(-angle);
                 g2.translate(-x2, -y2);
 
-                // Okun ortasına metin eklenmesi: girdi / sonraki durumun çıktısı
+                // Okun ortasına metin eklenmesi: girdi / sonraki durumun cıktısı
                 String inputSymbol = (i < inputs.size()) ? inputs.get(i) : "";
                 String nextOutput = (i + 1 < outputs.size()) ? outputs.get(i + 1) : "";
                 String label = inputSymbol;
@@ -333,7 +333,7 @@ public class MooreSimulatorGUI extends JFrame {
     }
 
     /**
-     * Main metod: Uygulamayı başlatır.
+     * Main metod: Uygulamayı baslatır.
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MooreSimulatorGUI().setVisible(true));
