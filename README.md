@@ -76,5 +76,5 @@ abab
 ```
 ## 📸 Ekran Görüntüsü
 
-![Moore Machine Simülatörü](screenshots/gui_preview.png)
+![Moore Machine Simülatörü](screenshots/gui_preview.jpg)
 
