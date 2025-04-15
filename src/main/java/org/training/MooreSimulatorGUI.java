@@ -7,21 +7,6 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
-/**
- * Moore Makinesi simülasyonunu gerçekleştiren Java Swing uygulaması.
- *
- * Kullanıcıdan:
- *  - Durum kümesi (Q: {q0,q1,q2,...})
- *  - Girdi alfabeti (S: {a,b})
- *  - Çıktı alfabeti (Γ: {0,1})
- *  - Geçiş tablosu (GECISTABLOSU.TXT formatında, her satır TAB ile ayrılmış)
- *  - Çıktı tablosu (OUTPUT.TXT formatında, her satır TAB ile ayrılmış)
- *  - Giriş stringi
- *
- * Alınan bu bilgilerle, simülasyon sırasında her geçiş hesaplanır,
- * durumlar ve üretilen çıktı kullanıcıya metinsel olarak gösterilir.
- * Ayrıca görsel panelde simülasyon adımları çizimsel olarak sunulur.
- */
 public class MooreSimulatorGUI extends JFrame {
 
     // Arayüz bileşenleri
@@ -34,7 +19,7 @@ public class MooreSimulatorGUI extends JFrame {
     private final JTextArea areaResult;
     private final SimulationPanel simulationPanel;
 
-    // Yapılandırıcı: arayüzün oluşturulması
+    // Arayüzün oluşturulması
     public MooreSimulatorGUI() {
         setTitle("Moore Makinesi Simülatörü");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,14 +40,14 @@ public class MooreSimulatorGUI extends JFrame {
         gbc.gridx = 1; gbc.weightx = 1.0;
         inputPanel.add(txtStates, gbc);
 
-        // Satır 2: Girdi Alfabeti
+        // Satır 2: Girdi Alfabesi
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
         inputPanel.add(new JLabel("Girdi Alfabeti (virgülle ayrılmış):"), gbc);
         txtInputAlphabet = new JTextField("a,b");
         gbc.gridx = 1; gbc.weightx = 1.0;
         inputPanel.add(txtInputAlphabet, gbc);
 
-        // Satır 3: Çıktı Alfabeti
+        // Satır 3: Çıktı Alfabesi
         gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0;
         inputPanel.add(new JLabel("Çıktı Alfabeti (virgülle ayrılmış):"), gbc);
         txtOutputAlphabet = new JTextField("0,1");
